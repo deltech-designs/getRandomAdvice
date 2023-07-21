@@ -28,6 +28,15 @@
     padding: 1rem;
 }
 
+.star-icon{
+    font-size: 3rem;
+    color: #ff6500;
+}
+
+.copy-icon{
+    color: white; 
+}
+
 h1{
     margin-bottom: 1rem;
     color: #fff;
@@ -35,10 +44,24 @@ h1{
 }
 
 .advice-text{
-    display:block;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: ; */
     width: 100%;
     height: 100px;
     color: #fff;
+    padding: 0 1rem;
+}
+
+.copy-text{
+    position: relative; 
+    right: 0;
+    top: 0;
+    align-self: flex-end;
+}
+
+.copy-icon{
+    font-size: 1.5rem;
 }
 
 .btn{

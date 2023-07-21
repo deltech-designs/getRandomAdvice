@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'; 
-import {  } from "react-icons/io";
+import { IoIosStar, IoIosCopy } from "react-icons/io";
 import  './App.css'
 
 function App() {
@@ -17,13 +17,25 @@ function App() {
     getAdvice()
   }, [])
 
+
+  const copyText = () => {
+    alert("Hello World!")
+  }
+
   return (
     <>
       <div className='container'>
         <div className='inner-container'>
-          <p>icon</p>
+          < IoIosStar className='star-icon' /> 
           <h1 className='title'>Get Random Advice</h1>
-          <div className="advice-text">{advice}</div>
+          <div className="advice-text">
+            <div className="copy-text">
+              <IoIosCopy className="copy-icon" onClick={copyText} />
+            </div>
+            <div>
+              {advice}
+            </div>
+          </div>
           <button className='btn' onClick={getAdvice}>Get Advice</button>
           <p className='count'>The number of piece of advice is {count}</p>
         </div>
