@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react'; 
+import { useEffect, useState, useRef } from 'react'; 
 import { IoIosStar, IoIosCopy } from "react-icons/io";
 import  './App.css'
 
 function App() {
+  const textRef = useRef(null); 
   const [advice, setAdvice] = useState(""); 
   const [count, setCount] = useState(0)
 
@@ -10,7 +11,7 @@ function App() {
     const res = await fetch("https://api.adviceslip.com/advice"); 
     const data = await res.json(); 
     setAdvice(data.slip.advice);
-    setCount(count => count + 1)
+    setCount(count => count + 1); 
   }
 
   useEffect(function(){
@@ -19,7 +20,13 @@ function App() {
 
 
   const copyText = () => {
-    alert("Hello World!")
+    if(textRef.current){
+      textRef.current.select; 
+      document.execCommand('copy')
+      console.log(textRef.current.value); 
+    }
+
+    // alert("Hello World!")
   }
 
   return (
@@ -32,7 +39,7 @@ function App() {
             <div className="copy-text">
               <IoIosCopy className="copy-icon" onClick={copyText} />
             </div>
-            <div>
+            <div ref={textRef}>
               {advice}
             </div>
           </div>
