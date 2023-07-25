@@ -3,9 +3,9 @@ import { IoIosStar, IoIosCopy } from "react-icons/io";
 import  './App.css'
 
 function App() {
-  const textRef = useRef(null); 
   const [advice, setAdvice] = useState(""); 
   const [count, setCount] = useState(0)
+  const elementRef = useRef(null);
 
   async function getAdvice(){
     const res = await fetch("https://api.adviceslip.com/advice"); 
@@ -20,13 +20,16 @@ function App() {
 
 
   const copyText = () => {
-    if(textRef.current){
-      textRef.current.select; 
-      document.execCommand('copy')
-      console.log(textRef.current.value); 
+    if (elementRef.current) {
+        const range = document.createRange();
+        range.selectNode(elementRef.current);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+        // Optionally, you can show a message or update the state to indicate the text has been copied.
+        console.log(elementRef.current.innerText);
     }
-
-    // alert("Hello World!")
   }
 
   return (
@@ -39,7 +42,7 @@ function App() {
             <div className="copy-text">
               <IoIosCopy className="copy-icon" onClick={copyText} />
             </div>
-            <div ref={textRef}>
+            <div ref={elementRef} >
               {advice}
             </div>
           </div>
@@ -51,4 +54,4 @@ function App() {
   )
 }
 
-export default App
+export default App; 
